@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="fragments/header :: myheader"></div>
+    <title>testConstructor</title>
+</head>
+<body>
+<div class="form-row">
+    <!--<div class="form-group col-md-6">
+        <form class="form-inline my-4" th:action="@{/testConstructor}" method="get">
+            <div>Конструктор теста</div>
+            <label class="col-sm-2 col-form-label">Название теста :</label>
+            <input class="form-control ml-2" type="text" name="testName">
+            <button class="btn btn-primary ml-2" type="submit">Создать тест</button>
+        </form>
+    </div>-->
+
+    <div class="form-group col-md-6">
+    <div>Список вопросов</div>
+    <div th:action="@{/testConstructor}" th:each="question : ${questions}">
+        <span th:text="'name = ' + ${question.questionName}"></span>
+    </div>
+
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Add question
+    </a>
+    <div class="collapse" id="collapseExample">
+        <div class="form-group mt-3 col-md-6">
+            <form th:action="@{/testConstructor}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="questionText" placeholder="Enter question" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+                <input type="hidden" th:value="${test.id}" name="testId">
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+<a href="/main">выйти</a>
+
+<div th:insert="fragments/scriptsJS :: scripts"></div>
+</body>
+</html>
